@@ -2,12 +2,17 @@ import connect from '../db'
 import { NextResponse } from "next/server"
 import User from "../../models/user"
 
-export const GET = async (request) => {
+export const searchUser = async (userEmail) => {
 	try {
 		await connect()
-		const users = await User.find()
-		console.log(JSON.stringify(users))
-		return new NextResponse(JSON.stringify(users), {status: 200})
+		const users = await User.find({ email: userEmail })
+		// console.log(JSON.stringify(users))
+		// console.log(users?.length)
+		if (users?.length > 0) {
+			return true
+		}
+		// return new NextResponse(JSON.stringify(users), {status: 200})
+		return
 	} catch(error) {
 		return new NextResponse("error in fetching users" + error, {status: 500})
 	}
