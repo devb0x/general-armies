@@ -12,7 +12,7 @@ export const searchUser = async (userEmail) => {
 			return true
 		}
 		// return new NextResponse(JSON.stringify(users), {status: 200})
-		return
+		return false
 	} catch(error) {
 		return new NextResponse("error in fetching users" + error, {status: 500})
 	}
