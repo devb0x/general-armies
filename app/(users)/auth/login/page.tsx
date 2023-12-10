@@ -1,7 +1,3 @@
-// register component for new user
-// check query params in url if (new_user) disabled input email
-// https://nextjs.org/docs/app/api-reference/functions/server-actions#with-client-components
-
 
 'use client'
 
@@ -30,7 +26,7 @@ const Register = () => {
 			<div>
 
 				<br/>
-				register compo after email entered
+				login compo after email entered & email exist
 				<hr/>
 				<br/>
 
@@ -38,7 +34,7 @@ const Register = () => {
 			<AuthForm
 				isEmailEntered={emailEntered}
 				email={email}
-				action={registerUserAction}
+				action={null}
 			/>
 		</>
 	)

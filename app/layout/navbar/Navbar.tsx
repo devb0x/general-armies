@@ -40,8 +40,13 @@ const Navbar: React.FC = () => {
 						</Link>
 					</li>
 					<li>
-						<Link href={'/auth'}>
-							Login
+						<Link href={'/api/auth/signin'}>
+							Signin
+						</Link>
+					</li>
+					<li>
+						<Link href={'/api/auth/signout'}>
+							Signout
 						</Link>
 					</li>
 				</ul>
@@ -75,11 +80,20 @@ const Navbar: React.FC = () => {
 						</li>
 						<li>
 							<Link
-								href={'/auth'}
+								href={'/api/auth/signin'}
 								className={`${styles['mobile-nav-list__link']}`}
 								onClick={toggleNav}
 							>
-								Login
+								Signin
+							</Link>
+						</li>
+						<li>
+							<Link
+								href={'/api/auth/signout'}
+								className={`${styles['mobile-nav-list__link']}`}
+								onClick={toggleNav}
+							>
+								Signout
 							</Link>
 						</li>
 					</ul>
