@@ -2,14 +2,18 @@
 
 import React, {useEffect, useState} from "react"
 
-import { searchAction } from '../../utils/actions'
-import {useSearchParams} from "next/navigation";
+import { searchUserAction } from '../../utils/actions'
+import {useRouter, useSearchParams} from "next/navigation"
+
+import styles from './authForm.module.css'
 
 const AuthForm = (props) => {
 	const [isEmailEntered, setIsEmailEntered] = useState(props.isEmailEntered || false)
 
 	const searchParams = useSearchParams()
 	const email = searchParams.get('email')
+
+	const router = useRouter()
 
 	useEffect(() => {
 		if (email != null) {
@@ -18,23 +22,54 @@ const AuthForm = (props) => {
 	}, [email])
 
 	return (
-		<>
-			<form action={searchAction} noValidate >
-				<fieldset>
-					<label htmlFor="email">
-						Email Address
-					</label>
+		<form
+			action={props.action}
+			className={styles.form}
+			noValidate={true}
+		>
+			<fieldset className={styles.fieldset}>
+				<label htmlFor="email">
+					Email Address
+				</label>
+				<div>
 					<input
 						type="email"
 						id="email"
 						name="email"
-						value={props.email}
+						defaultValue={props.email || email}
 						disabled={isEmailEntered}
 					/>
-					<button type="submit" >Continue</button>
-				</fieldset>
-			</form>
-		</>
+					{isEmailEntered &&
+						<button
+							type="button"
+							onClick={() => {
+								console.log('edit btn clicked')
+								router.push('/auth')
+							}
+						}>Edit</button>
+					}
+				</div>
+				{isEmailEntered &&
+					<>
+						<label htmlFor="password">
+							Password
+						</label>
+						<input
+							type="password"
+							id="password"
+							name="password"
+						/>
+					</>
+				}
+				<button
+					type="submit" >
+					{isEmailEntered ?
+						'Create Account' :
+						'Continue'
+					}
+				</button>
+			</fieldset>
+		</form>
 	)
 }
 

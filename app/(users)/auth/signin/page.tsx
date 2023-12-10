@@ -1,0 +1,29 @@
+"use client"
+
+import React from "react"
+import { signIn } from "next-auth/react"
+import LoginButton from "@/app/components/Button/LoginButton";
+// import {getProviders} from "next-auth/src/react";
+
+const SignIn: React.FC = () => {
+
+	return (
+		<div>
+			<h1>Sign In custom page from next auth</h1>
+			{/*<LoginButton provider={"github"} />*/}
+			<button
+				onClick={() => signIn("github", { callbackUrl: "/dashboard"})}
+			>
+				Sign in with GitHub
+			</button>
+			<br/>
+			<button
+				onClick={() => signIn("google", { callbackUrl: "/dashboard"})}
+			>
+				Sign in with Google
+			</button>
+		</div>
+	)
+}
+
+export default SignIn

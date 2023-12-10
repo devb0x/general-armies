@@ -1,0 +1,17 @@
+.form {
+
+}
+
+.fieldset {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	border: none;
+}
+
+.fieldset > button {
+	background-color: black;
+	color: white;
+	padding: 10px;
+	border: 0;
+}
