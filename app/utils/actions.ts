@@ -1,8 +1,8 @@
 'use server'
 
-import {createUser} from "../api/users/route"
+import {createUser} from "@/app/api/users/route"
 import { redirect } from "next/navigation"
-import {createArmy} from "@/app/api/dashboard/route";
+import {createArmy} from "@/app/api/dashboard/route"
 
 export  async function searchUserAction(formData: FormData) {
 	'use server'
@@ -37,8 +37,6 @@ export async function registerUserAction(formData: FormData) {
 	console.log(userPassword)
 
 	await createUser(userEmail, userPassword)
-
-	// redirect('/')
 }
 
 export async function createArmyAction(formData: FormData) {

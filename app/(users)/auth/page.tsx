@@ -1,10 +1,10 @@
 'use client'
+
 import React from "react"
 
-import AuthForm from "@/app/components/AuthForm/AuthForm";
-import {searchUserAction} from "@/app/utils/actions";
-import LoginButton from "@/app/components/Button/LoginButton";
-import {redirect} from "next/navigation";
+import AuthForm from "@/app/components/AuthForm/AuthForm"
+import {searchUserAction} from "@/app/utils/actions"
+import LoginButton from "@/app/components/Button/LoginButton"
 
 const Auth: React.FC = () => {
 

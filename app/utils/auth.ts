@@ -3,7 +3,7 @@ import GitHub from "next-auth/providers/Github"
 import GoogleProvider from "next-auth/providers/google"
 
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
-import clientPromise from "../api/mongodb"
+import clientPromise from "@/app/api/mongodb"
 
 export const { handlers, auth } = NextAuth({
 	providers:
