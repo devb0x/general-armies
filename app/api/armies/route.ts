@@ -1,9 +1,9 @@
-import { auth } from "../../utils/auth"
+import {auth} from "@/app/utils/auth"
 import connect from "../db"
 import { NextResponse } from "next/server"
 import Army from "../../models/army"
 
-export const GET = async () => {
+export const GET = async (): Promise<any> => {
 	const session = await auth()
 
 	if (!session) {
@@ -19,7 +19,7 @@ export const GET = async () => {
 
 }
 
-export const GetArmyById = async (id) => {
+export const GetArmyById = async (id): Promise<any> => {
 	const session = await auth()
 
 	if (!session) {

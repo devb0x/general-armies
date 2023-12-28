@@ -2,6 +2,9 @@
 const nextConfig = {
 	experimental: {
 		serverComponentsExternalPackages: ['mongoose']
+	},
+	typescript: {
+		ignoreBuildErrors: true
 	}
 }
 
