@@ -1,8 +1,13 @@
 import mongoose from 'mongoose'
 
 const armySchema = new mongoose.Schema({
-	name: String,
+	// _id: String,
 	ownerId: String,
+	name: String,
+	faction: String,
+	description: String,
+	lore: String,
+	units: Array
 })
 
 const Army = mongoose.models.Army || mongoose.model('Army', armySchema)

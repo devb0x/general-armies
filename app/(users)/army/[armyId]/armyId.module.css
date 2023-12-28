@@ -1,0 +1,36 @@
+.army {
+	display: flex;
+	flex-direction: column;
+	gap: 44px;
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+.army-title {
+	font-size: 40px;
+	font-weight: 500;
+}
+
+.army-title__sub {
+	font-size: 14px;
+	/*font-weight: 500;*/
+	font-style: italic;
+	opacity: 60%;
+}
+
+.army-section {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.army-section__title {
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 31px;
+}
+
+.army-section__text {
+	line-height: 21px;
+	font-size: 16px;
+}

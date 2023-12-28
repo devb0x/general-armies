@@ -1,5 +1,4 @@
 import connect from '../db'
-import { connectToDatabase } from "@/app/api/mongodb"
 
 import { NextResponse } from "next/server"
 import User from "../../models/user"
@@ -35,18 +34,18 @@ export const createUser = async (userEmail, userPassword) => {
 
 }
 
-export const searchUserTwo = async (userEmail) => {
-	try {
-		await connectToDatabase()
-		const users = await User.find({ email: userEmail })
-		let db
-		let client
-		console.log(db)
-		console.log(client)
-		if (users?.length > 0) {
-			return true
-		}
-	} catch (error) {
-		return new NextResponse("error in fetching users" + error, {status: 500})
-	}
-}
+// export const searchUserTwo = async (userEmail) => {
+// 	try {
+// 		await connectToDatabase()
+// 		const users = await User.find({ email: userEmail })
+// 		let db
+// 		let client
+// 		console.log(db)
+// 		console.log(client)
+// 		if (users?.length > 0) {
+// 			return true
+// 		}
+// 	} catch (error) {
+// 		return new NextResponse("error in fetching users" + error, {status: 500})
+// 	}
+// }
