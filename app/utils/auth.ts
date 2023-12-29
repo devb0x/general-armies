@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import clientPromise from "../api/mongodb"
 
-export const { handlers } = NextAuth({
+export const { handlers, auth } = NextAuth({
 	providers:
 		[
 			GitHub({
