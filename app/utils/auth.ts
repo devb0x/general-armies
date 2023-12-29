@@ -17,9 +17,6 @@ export const { handlers, auth } = NextAuth({
 				allowDangerousEmailAccountLinking: true,
 			})
 		],
-	pages: {
-		signIn: "/auth/signin"
-	},
 	adapter: MongoDBAdapter(clientPromise),
 	callbacks: {
 		async session({session, user}) {
