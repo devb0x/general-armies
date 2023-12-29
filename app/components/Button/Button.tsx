@@ -1,7 +1,7 @@
 'use client'
 
 
-const Button = ({createArmy}: {createArmy: () => void}) => {
+const Button = (props, {createArmy}: {createArmy: () => void}) => {
 	return (
 		<button
 			type="button"
@@ -9,7 +9,7 @@ const Button = ({createArmy}: {createArmy: () => void}) => {
 				createArmy()
 			}}
 		>
-			Create Army
+			{props.text}
 		</button>
 	)
 }
