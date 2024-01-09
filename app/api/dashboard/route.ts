@@ -1,7 +1,7 @@
 import connect from "@/app/api/db"
 import {NextResponse} from "next/server"
 
-import Army from '../../models/army'
+import Army from '@/app/models/army'
 import {auth} from "@/app/utils/auth"
 
 
@@ -44,5 +44,6 @@ export const findUserArmies = async (ownerId) => {
 
 	return Army.find({ownerId: ownerId})
 }
+
 
 

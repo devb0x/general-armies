@@ -2,17 +2,17 @@
 
 import React from "react"
 import { signIn } from "next-auth/react"
-import LoginButton from "@/app/components/Button/LoginButton";
-// import {getProviders} from "next-auth/src/react";
 
-const SignIn: React.FC = () => {
+const SignIn: React.FC = (props) => {
+	console.log(props)
 
 	return (
 		<div>
 			<h1>Sign In custom page from next auth</h1>
-			{/*<LoginButton provider={"github"} />*/}
 			<button
-				onClick={() => signIn("github", { callbackUrl: "/dashboard"})}
+				onClick={
+					() => signIn("github", { callbackUrl: "/dashboard"})
+				}
 			>
 				Sign in with GitHub
 			</button>
