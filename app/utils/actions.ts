@@ -1,6 +1,6 @@
 'use server'
 
-import {createUser} from "@/app/api/users/route"
+import {createUser, loginUser, searchUser} from "@/app/api/users/route"
 import { redirect } from "next/navigation"
 import {createArmy} from "@/app/api/dashboard/route"
 
@@ -30,13 +30,23 @@ export  async function searchUserAction(formData: FormData) {
 export async function registerUserAction(formData: FormData) {
 	'use server'
 
+	const userName = formData.get("username")
 	const userEmail = formData.get("email")
 	const userPassword = formData.get("password")
 
 	console.log('register user action called')
 	console.log(userPassword)
 
-	await createUser(userEmail, userPassword)
+	await createUser(userName, userEmail, userPassword)
+}
+
+export async function loginUserAction(formData: FormData) {
+	'use server'
+
+	const userEmail = formData.get("email")
+	const userPassword = formData.get("password")
+
+	await loginUser(userEmail, userPassword)
 }
 
 export async function createArmyAction(formData: FormData) {

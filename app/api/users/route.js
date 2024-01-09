@@ -19,7 +19,7 @@ export const searchUser = async (userEmail) => {
 	}
 }
 
-export const createUser = async (userEmail, userPassword) => {
+export const createUser = async (userName, userEmail, userPassword) => {
 	try {
 		await connect()
 	} catch(error) {
@@ -27,10 +27,38 @@ export const createUser = async (userEmail, userPassword) => {
 	}
 
 	const newUser = new User({
+		name: userName,
 		email: userEmail,
 		password: userPassword
 	})
 	await newUser.save(newUser)
+
+}
+
+export const loginUser = async (userEmail, userPassword) => {
+	try {
+		await connect()
+
+		/**
+		 * return an array of one (object) User
+		 * @type {Query<Array<HydratedDocument<any, unknown, {}>>, any, {}, any, "find">}
+		 */
+		const user = await User.find({ email: userEmail })
+
+		if (user[0] === undefined) {
+			console.log(userEmail + ' address doesn\'t exist')
+		}
+
+		if (user) {
+			if (userPassword === user[0].password) {
+				console.log('passwords matches, user should be set as logged')
+			}
+		}
+	} catch (error) {
+		return new NextResponse("error in login user" + error, {status: 500})
+	}
+
+
 
 }
 
