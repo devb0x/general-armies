@@ -35,7 +35,6 @@ export async function registerUserAction(formData: FormData) {
 	const userPassword = formData.get("password")
 
 	console.log('register user action called')
-	console.log(userPassword)
 
 	await createUser(userName, userEmail, userPassword)
 }

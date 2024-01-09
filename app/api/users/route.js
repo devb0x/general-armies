@@ -2,6 +2,7 @@ import connect from '../db'
 
 import { NextResponse } from "next/server"
 import User from "../../models/user"
+import bcrypt from "bcrypt"
 
 export const searchUser = async (userEmail) => {
 	try {
@@ -26,13 +27,19 @@ export const createUser = async (userName, userEmail, userPassword) => {
 		return new NextResponse("error in saving newUser" + error, {status: 500})
 	}
 
-	const newUser = new User({
-		name: userName,
-		email: userEmail,
-		password: userPassword
-	})
-	await newUser.save(newUser)
+	const saltRounds = 10
 
+	bcrypt.genSalt(saltRounds, function(err, salt) {
+		bcrypt.hash(userPassword, salt, function(err, hash) {
+			// Store hash in your password DB.
+			const newUser = new User({
+				name: userName,
+				email: userEmail,
+				password: hash
+			})
+			newUser.save(newUser)
+		})
+	})
 }
 
 export const loginUser = async (userEmail, userPassword) => {
@@ -50,8 +57,14 @@ export const loginUser = async (userEmail, userPassword) => {
 		}
 
 		if (user) {
-			if (userPassword === user[0].password) {
-				console.log('passwords matches, user should be set as logged')
+			// if (userPassword === user[0].password) {
+			// 	console.log('passwords matches, user should be set as logged')
+			// }
+			const match = await bcrypt.compare(userPassword, user[0].password)
+			if (match) {
+				console.log('user should be logged in')
+			} else if (!match) {
+				console.log('wrong password input')
 			}
 		}
 	} catch (error) {
