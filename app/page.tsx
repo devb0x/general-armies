@@ -5,6 +5,7 @@ import {auth} from "@/app/utils/auth";
 import ArmyCardLink from "@/app/components/ArmyCardLink/ArmyCardLink";
 import {findRandomArmy} from "@/app/api/homepage/route"
 
+
 export default async function Home() {
 	const army = await findRandomArmy()
 	console.log(army)

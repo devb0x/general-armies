@@ -3,6 +3,12 @@ import connect from '../db'
 import { NextResponse } from "next/server"
 import User from "../../models/user"
 import bcrypt from "bcrypt"
+import mongoose from "mongoose"
+import Mongodb from "@/app/api/mongodb"
+
+import clientPromise from "@/app/api/mongodb"
+import { MongoClient } from "mongodb"
+import db from "../db"
 
 export const searchUser = async (userEmail) => {
 	try {
@@ -27,13 +33,16 @@ export const createUser = async (userName, userEmail, userPassword) => {
 		return new NextResponse("error in saving newUser" + error, {status: 500})
 	}
 
+	/**
+	 * hash password and save user
+	 */
 	const saltRounds = 10
 
 	bcrypt.genSalt(saltRounds, function(err, salt) {
 		bcrypt.hash(userPassword, salt, function(err, hash) {
 			// Store hash in your password DB.
 			const newUser = new User({
-				name: userName,
+				username: userName,
 				email: userEmail,
 				password: hash
 			})
@@ -45,6 +54,7 @@ export const createUser = async (userName, userEmail, userPassword) => {
 export const loginUser = async (userEmail, userPassword) => {
 	try {
 		await connect()
+
 
 		/**
 		 * return an array of one (object) User
@@ -63,6 +73,32 @@ export const loginUser = async (userEmail, userPassword) => {
 			const match = await bcrypt.compare(userPassword, user[0].password)
 			if (match) {
 				console.log('user should be logged in')
+				console.log(user)
+				const client = new MongoClient(process.env.MONGODB_URI, {useUnifiedTopology: false})
+
+				const session = client.startSession()
+
+				// console.log(session)
+				await session.withTransaction(async () => {
+					const coll = client.db('database').collection('sessions')
+
+					if (coll.find({_id: user[0]._id})) {
+						console.log('session already exist')
+						return
+					}
+
+					await coll.insertOne(
+						{
+							_id: user[0]._id,
+							createdAt: new Date()
+						},
+						{ session }
+					)
+					/**
+					 * session expire after 30min
+					 */
+					await coll.createIndex({createdAt: 1}, {expireAfterSeconds: 60 * 30})
+				})
 			} else if (!match) {
 				console.log('wrong password input')
 			}
@@ -70,9 +106,6 @@ export const loginUser = async (userEmail, userPassword) => {
 	} catch (error) {
 		return new NextResponse("error in login user" + error, {status: 500})
 	}
-
-
-
 }
 
 // export const searchUserTwo = async (userEmail) => {

@@ -6,6 +6,7 @@ const connect = async () => {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})
+
 		console.log("mongo connection successful")
 	} catch (error) {
 		throw new Error("Error in connecting to mongodb..")
