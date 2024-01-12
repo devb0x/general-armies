@@ -6,6 +6,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 import Navbar from "@/app/layout/navbar/Navbar";
+import AuthContextProvider from "@/app/contexts/auth-context";
 
 export const metadata: Metadata = {
 	title: 'General Armies',
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
 		<html lang="en">
 			<body className={inter.className}>
-				<header>
-					<Navbar />
-				</header>
-				{children}
+				<AuthContextProvider>
+					<header>
+						<Navbar />
+					</header>
+					{children}
+				</AuthContextProvider>
 			</body>
 		</html>
 	)

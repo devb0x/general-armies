@@ -1,12 +1,17 @@
 "use client"
+
 import React, {useEffect, useState} from "react"
 import Link from "next/link";
 
 import styles from './navbar.module.css'
+import {useAuthContext} from "@/app/contexts/auth-context";
 
 const Navbar: React.FC = () => {
 	const [width, setWidth] = useState(0)
 	const [isToggle, setIsToggle] = useState(false)
+
+	const { auth, setAuth } = useAuthContext()
+
 
 	const updateWidth = () => {
 		let newWidth = window.innerWidth
