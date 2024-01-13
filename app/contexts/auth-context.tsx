@@ -15,7 +15,7 @@ export const AuthContext = createContext<AuthContext | null>(null)
 
 export default function AuthContextProvider({ children }: AuthContextProviderProps) {
 	const [auth, setAuth] = useState(false)
-	console.log(auth)
+	// console.log(auth)
 
 	return (
 		<AuthContext.Provider

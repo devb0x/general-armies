@@ -3,6 +3,7 @@
 import {createUser, loginUser, searchUser} from "@/app/api/users/route"
 import { redirect } from "next/navigation"
 import {createArmy} from "@/app/api/dashboard/route"
+import {cookies} from "next/headers";
 
 export  async function searchUserAction(formData: FormData) {
 	'use server'
@@ -44,6 +45,13 @@ export async function loginUserAction(formData: FormData) {
 
 	const userEmail = formData.get("email")
 	const userPassword = formData.get("password")
+
+	cookies().set({
+		name: 'userEmail',
+		value: userEmail,
+		httpOnly: true,
+		path: '/',
+	})
 
 	await loginUser(userEmail, userPassword)
 }
