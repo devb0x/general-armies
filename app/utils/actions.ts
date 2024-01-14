@@ -2,7 +2,7 @@
 
 import {createUser, loginUser, searchUser} from "@/app/api/account/route"
 import { redirect } from "next/navigation"
-import {createArmy} from "@/app/api/dashboard/route"
+// import {createArmy} from "@/app/api/dashboard/route"
 import {cookies} from "next/headers";
 import connect from "@/app/api/db";
 import User from "@/app/models/user";
