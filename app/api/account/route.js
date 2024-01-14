@@ -31,26 +31,28 @@ export const createUser = async (userName, userEmail, userPassword) => {
 
 	try {
 		await connect()
+
+		/**
+		 * hash password and save user
+		 */
+		const saltRounds = 10
+
+		bcrypt.genSalt(saltRounds, function(err, salt) {
+			bcrypt.hash(userPassword, salt, function(err, hash) {
+				// Store hash in your password DB.
+				const newUser = new User({
+					username: userName,
+					email: userEmail,
+					password: hash
+				})
+				return newUser.save(newUser)
+			})
+		})
 	} catch(error) {
 		return new NextResponse("error in saving newUser" + error, {status: 500})
 	}
 
-	/**
-	 * hash password and save user
-	 */
-	const saltRounds = 10
 
-	bcrypt.genSalt(saltRounds, function(err, salt) {
-		bcrypt.hash(userPassword, salt, function(err, hash) {
-			// Store hash in your password DB.
-			const newUser = new User({
-				username: userName,
-				email: userEmail,
-				password: hash
-			})
-			newUser.save(newUser)
-		})
-	})
 }
 
 export const loginUser = async (userEmail, userPassword) => {
