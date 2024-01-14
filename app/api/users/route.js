@@ -73,19 +73,18 @@ export const loginUser = async (userEmail, userPassword) => {
 				const session = await Session.find({ email: user[0].email })
 				console.warn(session)
 
-
-
 				if (session[0] === undefined) {
 					const newSession = new Session({
 						email: user[0].email,
 						value: 'some text',
-						expires_at: new Date()
+						startedAt: new Date(),
+						expiresAt: new Date() + 100
 					})
-					await newSession.createIndex({createdAt: 1}, {expireAfterSeconds: 60})
-					await newSession.save(newSession)
+					console.log(newSession)
+					newSession.save(newSession)
 				} else {
 					console.log('session exist, updating..')
-					const update = {value: "new value", expires_at: new Date()}
+					const update = {value: "new value"}
 					await Session.findOneAndUpdate(update)
 					console.log('new session: ' + session[0])
 				}
