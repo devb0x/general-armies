@@ -4,6 +4,7 @@ import connect from '../app/api/db'
 import {auth} from "@/app/utils/auth";
 import ArmyCardLink from "@/app/components/ArmyCardLink/ArmyCardLink";
 import {findRandomArmy} from "@/app/api/homepage/route"
+import {addPost} from "@/app/utils/actions";
 
 
 export default async function Home() {
@@ -24,6 +25,12 @@ export default async function Home() {
 				/>
 
 			))}
+			<hr/>
+			<form action={addPost}>
+				<input type="text" placeholder="title" name="title"/>
+				<input type="text" placeholder="desc" name="desc"/>
+				<button type={"submit"}>Create</button>
+			</form>
 		</main>
 	)
 }

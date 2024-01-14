@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
 
 	useEffect(() => {
 		window.addEventListener('resize', updateWidth)
-		console.log(window.innerWidth)
+		// console.log(window.innerWidth)
 	}, [width])
 
 	return (

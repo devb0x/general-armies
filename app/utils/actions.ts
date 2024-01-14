@@ -6,10 +6,14 @@ import {createArmy} from "@/app/api/dashboard/route"
 import {cookies} from "next/headers";
 import connect from "@/app/api/db";
 import User from "@/app/models/user";
+import Post from "@/app/models/post";
 import bcrypt from "bcrypt";
 import {NextResponse} from "next/server";
+import {revalidatePath} from "next/cache";
 
-export  async function searchUserAction(formData: FormData) {
+import {connectToDb} from "../utils/connectToDb";
+
+export async function searchUserAction(formData: FormData) {
 	'use server'
 
 	const userEmail = formData.get("email")
@@ -121,3 +125,27 @@ export async function createArmyAction(formData: FormData) {
 			redirect('/dashboard')
 	})
 }
+
+export const addPost = async (formData: FormData) => {
+	// const title = formData.get("title");
+	// const desc = formData.get("desc");
+	// const slug = formData.get("slug");
+
+	const { title, desc } = Object.fromEntries(formData);
+
+	try {
+		await connectToDb();
+		const newPost = new Post({
+			title,
+			desc
+		});
+
+		await newPost.save();
+		console.log("saved to db");
+		revalidatePath("/blog");
+		revalidatePath("/admin");
+	} catch (err) {
+		console.log(err);
+		return { error: "Something went wrong!" };
+	}
+};
