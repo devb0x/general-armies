@@ -28,6 +28,7 @@ export const searchUser = async (userEmail) => {
 }
 
 export const createUser = async (userName, userEmail, userPassword) => {
+	'use server'
 
 	try {
 		await connect()
