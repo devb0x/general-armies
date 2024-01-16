@@ -37,41 +37,41 @@ export async function searchUserAction(formData: FormData) {
 }
 
 export async function registerUserAction(formData: FormData) {
-	// 'use server'
+	'use server'
+
+	const userName = formData.get("username")
+	const userEmail = formData.get("email")
+	const userPassword = formData.get("password")
+
+	console.log('register user action called')
+
+	return await createUser(userName, userEmail, userPassword)
+
+	// const createUser = async (userName, userEmail, userPassword) => {
 	//
-	// const userName = formData.get("username")
-	// const userEmail = formData.get("email")
-	// const userPassword = formData.get("password")
+	// 	try {
+	// 		await connect()
 	//
-	// console.log('register user action called')
+	// 		/**
+	// 		 * hash password and save user
+	// 		 */
+	// 		const saltRounds = 10
 	//
-	// return await createUser(userName, userEmail, userPassword)
-
-	const createUser = async (userName, userEmail, userPassword) => {
-
-		try {
-			await connect()
-
-			/**
-			 * hash password and save user
-			 */
-			const saltRounds = 10
-
-			bcrypt.genSalt(saltRounds, function (err, salt) {
-				bcrypt.hash(userPassword, salt, function (err, hash) {
-					// Store hash in your password DB.
-					const newUser = new User({
-						username: userName,
-						email: userEmail,
-						password: hash
-					})
-					return newUser.save(newUser)
-				})
-			})
-		} catch (error) {
-			return new NextResponse("error in saving newUser" + error, {status: 500})
-		}
-	}
+	// 		bcrypt.genSalt(saltRounds, function (err, salt) {
+	// 			bcrypt.hash(userPassword, salt, function (err, hash) {
+	// 				// Store hash in your password DB.
+	// 				const newUser = new User({
+	// 					username: userName,
+	// 					email: userEmail,
+	// 					password: hash
+	// 				})
+	// 				return newUser.save(newUser)
+	// 			})
+	// 		})
+	// 	} catch (error) {
+	// 		return new NextResponse("error in saving newUser" + error, {status: 500})
+	// 	}
+	// }
 
 	// const { userName, userEmail, userPassword } = Object.fromEntries(formData)
 

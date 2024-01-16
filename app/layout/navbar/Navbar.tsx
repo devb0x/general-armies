@@ -45,12 +45,17 @@ const Navbar: React.FC = () => {
 						</Link>
 					</li>
 					<li>
-						<Link href={'/api/auth/signin'}>
+						<Link href={'/auth/account'}>
+							Account
+						</Link>
+					</li>
+					<li>
+						<Link href={'/api/auth/signin'} aria-disabled={true}>
 							Signin
 						</Link>
 					</li>
 					<li>
-						<Link href={'/api/auth/signout'}>
+						<Link href={'/api/auth/signout'} aria-disabled={true}>
 							Signout
 						</Link>
 					</li>

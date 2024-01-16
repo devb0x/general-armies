@@ -80,12 +80,6 @@ const AccountPage = () => {
 						</button>
 					</fieldset>
 				</form>
-				<form action={addPost}>
-					<input type="text" placeholder="title" name="title"/>
-					<input type="text" placeholder="desc" name="desc"/>
-					<button type={"submit"}>Create</button>
-				</form>
-
 			</section>
 
 		</div>
