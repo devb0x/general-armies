@@ -3,13 +3,9 @@ import connect from '../db'
 import { NextResponse } from "next/server"
 import User from "../../models/user"
 import bcrypt from "bcrypt"
-import mongoose from "mongoose"
-import Mongodb from "@/app/api/mongodb"
 
-import clientPromise from "@/app/api/mongodb"
-import { MongoClient } from "mongodb"
-import db from "../db"
 import Session from "@/app/models/session"
+import { cookies } from "next/headers"
 
 export const searchUser = async (userEmail) => {
 	try {
@@ -28,7 +24,6 @@ export const searchUser = async (userEmail) => {
 }
 
 export const createUser = async (userName, userEmail, userPassword) => {
-	'use server'
 
 	try {
 		await connect()
@@ -57,6 +52,7 @@ export const createUser = async (userName, userEmail, userPassword) => {
 }
 
 export const loginUser = async (userEmail, userPassword) => {
+
 	try {
 		await connect()
 		/**
@@ -93,6 +89,22 @@ export const loginUser = async (userEmail, userPassword) => {
 				}
 			}
 		}
+
+		console.log('setting cookies..')
+
+		await cookies().set({
+			name: 'userEmail',
+			value: user[0].email,
+			httpOnly: true,
+			path: '/',
+		})
+		await cookies().set({
+			name: 'userName',
+			value: user[0].username,
+			httpOnly: true,
+			path: '/',
+		})
+
 
 
 				// 	/**

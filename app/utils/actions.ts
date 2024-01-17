@@ -75,25 +75,6 @@ export async function registerUserAction(formData: FormData) {
 
 	// const { userName, userEmail, userPassword } = Object.fromEntries(formData)
 
-	try {
-		await connect()
-
-		// const userName = formData.get("username")
-		// const userEmail = formData.get("email")
-		// const userPassword = formData.get("password")
-		// const saltRounds = 10
-
-		// const salt = await bcrypt.genSalt(10);
-		// const hashedPassword = await bcrypt.hash(userPassword, 10);
-		const userName = formData.get("username")
-		const userEmail = formData.get("email")
-		const userPassword = formData.get("password")
-
-		await createUser(userName, userEmail, userPassword)
-	} catch (err) {
-		console.log(err)
-		throw new Error("Failed to create user.")
-	}
 }
 
 export async function loginUserAction(formData: FormData) {
@@ -102,14 +83,19 @@ export async function loginUserAction(formData: FormData) {
 	const userEmail = formData.get("email")
 	const userPassword = formData.get("password")
 
-	// cookies().set({
+	await loginUser(userEmail, userPassword)
+	// await cookies().set({
 	// 	name: 'userEmail',
 	// 	value: userEmail,
 	// 	httpOnly: true,
 	// 	path: '/',
 	// })
-
-	await loginUser(userEmail, userPassword)
+	// await cookies().set({
+	// 	name: 'token',
+	// 	value: 'randomString',
+	// 	httpOnly: true,
+	// 	path: '/',
+	// })
 }
 
 export async function createArmyAction(formData: FormData) {

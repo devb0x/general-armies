@@ -27,6 +27,7 @@ const Navbar: React.FC = () => {
 		// console.log(window.innerWidth)
 	}, [width])
 
+
 	return (
 		<>
 			<nav className={`${styles['nav']}`}>
