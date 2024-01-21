@@ -1,6 +1,6 @@
 'use client'
 
-import React, {createContext, useContext, useEffect, useState} from "react"
+import React, {createContext, useContext, useState} from "react"
 
 type AuthContextProviderProps = {
 	children: React.ReactNode
@@ -15,7 +15,7 @@ export const AuthContext = createContext<AuthContext | null>(null)
 
 export default function AuthContextProvider({ children }: AuthContextProviderProps) {
 	const [auth, setAuth] = useState(false)
-	// console.log(auth)
+	console.log('log from ctx = ' + auth)
 
 	return (
 		<AuthContext.Provider

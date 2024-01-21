@@ -12,6 +12,8 @@ import {NextResponse} from "next/server";
 import {revalidatePath} from "next/cache";
 
 import {connectToDb} from "../utils/connectToDb";
+import {useAuthContext} from "@/app/contexts/auth-context";
+import {router} from "next/client";
 
 export async function searchUserAction(formData: FormData) {
 	'use server'
@@ -45,6 +47,14 @@ export async function registerUserAction(formData: FormData) {
 
 	console.log('register user action called')
 
+	const res = new Promise(async () => {
+		await createUser(userName, userEmail, userPassword)
+	}).then(async () => {
+		'use client'
+		const { auth, setAuth } = useAuthContext()
+		await console.log(auth)
+	})
+
 	return await createUser(userName, userEmail, userPassword)
 
 	// const createUser = async (userName, userEmail, userPassword) => {
@@ -77,25 +87,15 @@ export async function registerUserAction(formData: FormData) {
 
 }
 
-export async function loginUserAction(formData: FormData) {
+export async function loginUserAction(formData: FormData, request) {
 	'use server'
 
 	const userEmail = formData.get("email")
 	const userPassword = formData.get("password")
 
 	await loginUser(userEmail, userPassword)
-	// await cookies().set({
-	// 	name: 'userEmail',
-	// 	value: userEmail,
-	// 	httpOnly: true,
-	// 	path: '/',
-	// })
-	// await cookies().set({
-	// 	name: 'token',
-	// 	value: 'randomString',
-	// 	httpOnly: true,
-	// 	path: '/',
-	// })
+
+	console.log('login failed')
 }
 
 export async function createArmyAction(formData: FormData) {

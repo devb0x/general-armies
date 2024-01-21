@@ -2,13 +2,14 @@ import React from "react"
 
 // import ArmyCardLink from "@/app/components/ArmyCardLink/ArmyCardLink";
 import {addPost} from "@/app/utils/actions";
+// import ArmyCardLink from "@/app/components/ArmyCardLink/ArmyCardLink";
 
-
-export default async function Home() {
+export default async function Home(props) {
 	// const army = await findRandomArmy()
 	// console.log(army)
 
 	return (
+
 		<main>
 			<h1>This is the homepage</h1>
 			{/*<hr/>*/}

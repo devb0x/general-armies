@@ -4,14 +4,10 @@ import React, {useEffect, useState} from "react"
 import Link from "next/link";
 
 import styles from './navbar.module.css'
-import {useAuthContext} from "@/app/contexts/auth-context";
 
 const Navbar: React.FC = () => {
 	const [width, setWidth] = useState(0)
 	const [isToggle, setIsToggle] = useState(false)
-
-	const { auth, setAuth } = useAuthContext()
-
 
 	const updateWidth = () => {
 		let newWidth = window.innerWidth
@@ -27,11 +23,10 @@ const Navbar: React.FC = () => {
 		// console.log(window.innerWidth)
 	}, [width])
 
-
 	return (
 		<>
 			<nav className={`${styles['nav']}`}>
-				<div className={`${styles['logo']}`}>
+				<div className={`${styles['logo']}`} style={{marginRight: '1em'}}>
 					Logo
 				</div>
 				<ul className={`${styles['nav-list']}`}>
