@@ -11,3 +11,4 @@ export const findRandomArmy = async () => {
 
 	return Army.find().limit(-1).skip(1)
 }
+

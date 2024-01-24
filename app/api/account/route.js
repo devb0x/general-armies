@@ -10,7 +10,7 @@ import { redirect } from "next/navigation"
 
 import {AuthContext} from "@/app/contexts/auth-context";
 import { useContext } from "react"
-import UserSSR from "@/app/layout/username/UserSSR"
+import UserSSR from "@/app/layout/userNav/UserSSR"
 import { loginSuccess } from "@/app/utils/helpers"
 
 
@@ -80,7 +80,7 @@ export const loginUser = async (userEmail, userPassword) => {
 		if (match) {
 			console.log('user should be logged in')
 			const session = await Session.find({ email: user[0].email })
-			console.warn(session)
+			// console.warn(session)
 
 			if (session[0] === undefined) {
 
@@ -91,13 +91,13 @@ export const loginUser = async (userEmail, userPassword) => {
 					startedAt: new Date(),
 					expiresAt: new Date() + 100
 				})
-				console.log(newSession)
+				// console.log(newSession)
 				newSession.save(newSession)
 			} else {
 				console.log('session exist, updating..')
 				const update = {value: "new value"}
 				await Session.findOneAndUpdate(update)
-				console.log('new session: ' + session[0])
+				// console.log('new session: ' + session[0])
 			}
 
 			await cookies().set({
@@ -112,11 +112,19 @@ export const loginUser = async (userEmail, userPassword) => {
 				httpOnly: true,
 				path: '/',
 			})
+			await cookies().set({
+				name: '_id',
+				value: user[0]._id,
+				httpOnly: true,
+				path: '/',
+			})
 
 			/**
 				// 	 * session expire after 30min
 				// 	 */
 			// 	await coll.createIndex({createdAt: 1}, {expireAfterSeconds: 60 * 30})
+		} else {
+			console.log('login fail: wrong password or email')
 		}
 	}
 

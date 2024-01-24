@@ -1,0 +1,8 @@
+.user-nav {
+	width: 90%;
+	outline: 1px solid black;
+	display: flex;
+	margin-inline: auto;
+	margin-block: 2em;
+	justify-content: space-between;
+}

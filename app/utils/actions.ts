@@ -14,6 +14,7 @@ import {revalidatePath} from "next/cache";
 import {connectToDb} from "../utils/connectToDb";
 import {useAuthContext} from "@/app/contexts/auth-context";
 import {router} from "next/client";
+import {useEffect, useRef} from "react";
 
 export async function searchUserAction(formData: FormData) {
 	'use server'
@@ -94,8 +95,6 @@ export async function loginUserAction(formData: FormData, request) {
 	const userPassword = formData.get("password")
 
 	await loginUser(userEmail, userPassword)
-
-	console.log('login failed')
 }
 
 export async function createArmyAction(formData: FormData) {
@@ -135,3 +134,10 @@ export const addPost = async (formData: FormData) => {
 		return { error: "Something went wrong!" };
 	}
 };
+
+export const deleteOneCookie = async (arg) => {
+	'use server'
+
+	console.log('arg = ' + arg)
+	cookies().delete(arg)
+}

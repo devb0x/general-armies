@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 import Navbar from "@/app/layout/navbar/Navbar";
 import AuthContextProvider from "@/app/contexts/auth-context";
 
-import Username from "@/app/layout/username/Username";
+import Username from "@/app/layout/userNav/UserNav";
 import checkCookies from "@/app/utils/helpers";
 
 export const metadata: Metadata = {
@@ -23,6 +23,7 @@ export default async function RootLayout({
 }) {
 	const name = await checkCookies('userName')
 	const email = await checkCookies('userMail')
+	const _id = await checkCookies('_id')
 
 	return (
 		<html lang="en">
@@ -31,7 +32,7 @@ export default async function RootLayout({
 			<header>
 				<Navbar />
 				{name &&
-					<Username user={name} email={email}/>
+					<Username user={name} email={email} _id={_id}/>
 				}
 			</header>
 			{children}

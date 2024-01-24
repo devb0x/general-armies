@@ -1,5 +1,6 @@
-import {addPost, loginUserAction, registerUserAction} from "@/app/utils/actions"
-import React from "react";
+import React from "react"
+
+import { loginUserAction, registerUserAction } from "@/app/utils/actions"
 
 const AccountPage = () => {
 	return (

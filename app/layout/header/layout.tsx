@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Navbar from "@/app/layout/navbar/Navbar";
-import Username from "@/app/layout/username/Username";
+import Username from "@/app/layout/userNav/UserNav";
 
 export default function HeaderLayout({
 	children,
