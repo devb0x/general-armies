@@ -1,0 +1,110 @@
+.container {
+	display: flex;
+	margin: auto;
+	width: 90%;
+	margin-block: 4em;
+}
+
+.loader {
+	position: relative;
+	height: 150px;
+	width: 150px;
+	margin: auto;
+	/*background-color: #b9b9b9;*/
+	animation: rotation ease-in-out 2s infinite;
+}
+
+.one, .two, .three, .four {
+	position: absolute;
+	background-color: black;
+	height: 47%;
+	width: 2px;
+	border-radius: 5px;
+}
+
+.one {
+	top: 5%;
+	left: 55%;
+	transform: skew(-45deg);
+	animation: lineFadeOne ease-in-out 1s infinite;
+	animation-delay: .5s;
+	/*background-color: red;*/
+
+}
+.two {
+	top: 5%;
+	left: 40%;
+	transform: skew(45deg);
+	animation: lineFadeTwo ease-in-out 1s infinite;
+	animation-delay: .5s;
+}
+.three {
+	bottom: 5%;
+	left: 40%;
+	transform: skew(-45deg);
+	animation: lineFadeThree ease-in-out 1s infinite;
+	animation-delay: .5s;
+	/*background-color: blue;*/
+
+}
+.four {
+	bottom: 5%;
+	left: 55%;
+	transform: skew(45deg);
+	animation: lineFadeFour ease-in-out 1s infinite;
+	animation-delay: .5s;
+}
+
+@keyframes rotation {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes lineFadeOne {
+	from {
+		transform: skew(-45deg) translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: skew(-45deg) translateX(100px);
+		opacity: 0;
+	}
+}
+
+@keyframes lineFadeTwo {
+	from {
+		transform: skew(45deg) translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: skew(45deg) translateY(100px);
+		opacity: 0;
+	}
+}
+
+@keyframes lineFadeThree {
+	from {
+		transform: skew(-45deg) translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: skew(-45deg) translateY(100px);
+		opacity: 0;
+	}
+}
+
+@keyframes lineFadeFour {
+	from {
+		transform: skew(45deg) translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: skew(45deg) translateY(-100px) rotate(0deg);
+		opacity: 0;
+	}
+}
+
