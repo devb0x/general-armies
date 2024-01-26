@@ -4,6 +4,7 @@ import React from "react"
 import {addPost} from "@/app/utils/actions";
 import {findRandomArmy} from "@/app/api/homepage/route";
 import ArmyCardLink from "@/app/components/ArmyCardLink/ArmyCardLink";
+import Spinner from "@/app/components/Spinner/Spinner";
 
 export default async function Home(props) {
 	const army = await findRandomArmy()
@@ -13,6 +14,7 @@ export default async function Home(props) {
 
 		<main>
 			<h1>This is the homepage</h1>
+			<Spinner />
 			{/*<hr/>*/}
 			{/*{army.map((army, index) => (*/}
 			{/*	<ArmyCardLink*/}
