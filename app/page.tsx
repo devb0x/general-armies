@@ -14,7 +14,6 @@ export default async function Home(props) {
 
 		<main>
 			<h1>This is the homepage</h1>
-			<Spinner />
 			{/*<hr/>*/}
 			{/*{army.map((army, index) => (*/}
 			{/*	<ArmyCardLink*/}
