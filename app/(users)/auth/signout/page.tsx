@@ -1,6 +1,6 @@
 import { cookies } from "next/headers"
 
-import SignOutAction from "./SignOutAction"
+import SignOutAction from "@/app/(users)/auth/signout/SignoutAction"
 
 import Spinner from "@/app/components/Spinner/Spinner"
 
