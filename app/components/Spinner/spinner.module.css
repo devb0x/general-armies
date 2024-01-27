@@ -10,7 +10,6 @@
 	height: 150px;
 	width: 150px;
 	margin: auto;
-	/*background-color: #b9b9b9;*/
 	animation: rotation ease-in-out 2s infinite;
 }
 
@@ -28,8 +27,6 @@
 	transform: skew(-45deg);
 	animation: lineFadeOne ease-in-out 1s infinite;
 	animation-delay: .5s;
-	/*background-color: red;*/
-
 }
 .two {
 	top: 5%;
@@ -44,7 +41,6 @@
 	transform: skew(-45deg);
 	animation: lineFadeThree ease-in-out 1s infinite;
 	animation-delay: .5s;
-	/*background-color: blue;*/
 
 }
 .four {
