@@ -26,7 +26,9 @@ export default function SignOutAction({ deleteTokens }) {
 		setAuth(false)
 	}, [auth, setAuth])
 
-	return new Promise((resolve) => setTimeout(resolve, 2000))
+	new Promise((resolve) => setTimeout(resolve, 2000))
 		.then(r => router.push('/auth/account'))
+
+	return null
 }
 
